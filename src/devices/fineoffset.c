@@ -474,7 +474,11 @@ static int fineoffset_WH25_callback(r_device *decoder, bitbuffer_t *bitbuffer)
     unsigned bit_offset;
 
     // Validate package
-    if (bitbuffer->bits_per_row[0] < 190) {
+    //if (bitbuffer->bits_per_row[0] < 190) {
+     if (bitbuffer->bits_per_row[0] > 160 && bitbuffer->bits_per_row[0] < 190) {
+        type = 32; // new WN32B
+     }
+     else if (bitbuffer->bits_per_row[0] < 190) {
         return fineoffset_WH0290_callback(decoder, bitbuffer); // abort and try WH0290
     } else if (bitbuffer->bits_per_row[0] < 440) {  // Nominal size is 488 bit periods
         return fineoffset_WH24_callback(decoder, bitbuffer); // abort and try WH24, WH65B, HP1000
@@ -487,7 +491,8 @@ static int fineoffset_WH25_callback(r_device *decoder, bitbuffer_t *bitbuffer)
     // Find a data package and extract data payload
     // Normal index of WH25 is 367, and 123, 570 for WH32B
     // skip some bytes to find faster
-    bit_offset = bitbuffer_search(bitbuffer, 0, 100, preamble, sizeof(preamble) * 8) + sizeof(preamble) * 8;
+    //bit_offset = bitbuffer_search(bitbuffer, 0, 100, preamble, sizeof(preamble) * 8) + sizeof(preamble) * 8;
+    bit_offset = bitbuffer_search(bitbuffer, 0, 0, preamble, sizeof(preamble) * 8) + sizeof(preamble) * 8;
     if (bit_offset + sizeof(b) * 8 > bitbuffer->bits_per_row[0]) {  // Did not find a big enough package
         decoder_logf_bitbuffer(decoder, 1, __func__, bitbuffer, "short package. Header index: %u", bit_offset);
         return DECODE_ABORT_LENGTH;
