@@ -626,7 +626,8 @@ mappings = {
         "device_type": "sensor",
         "object_suffix": "consumption",
         "config": {
-            "name": "SCM Consumption Value",
+            "name": "Consumption Value",
+            "unit_of_measurement": "gal",
             "value_template": "{{ value|int }}",
             "state_class": "total_increasing",
         }
@@ -636,7 +637,8 @@ mappings = {
         "device_type": "sensor",
         "object_suffix": "consumption",
         "config": {
-            "name": "SCMplus Consumption Value",
+            "name": "Consumption Value",
+            "unit_of_measurement": "gal",
             "value_template": "{{ value|int }}",
             "state_class": "total_increasing",
         }
