@@ -627,9 +627,8 @@ mappings = {
         "object_suffix": "consumption",
         "config": {
             "name": "Consumption Value",
-            "unit_of_measurement": "gal",
             "value_template": "{{ value|int }}",
-            "state_class": "total_increasing",
+            "state_class": "measurement",
         }
     },
   
@@ -638,9 +637,8 @@ mappings = {
         "object_suffix": "consumption",
         "config": {
             "name": "Consumption Value",
-            "unit_of_measurement": "gal",
             "value_template": "{{ value|int }}",
-            "state_class": "total_increasing",
+            "state_class": "measurement",
         }
     },
 
